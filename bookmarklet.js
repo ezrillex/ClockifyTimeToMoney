@@ -64,7 +64,10 @@ if(valid) {
 
     // create an observer for weekly clock to trigger update of money elements. 
     const observer = new MutationObserver((mutationRecord) => {
+        updateClocksMoney()
+    });
 
+    function updateClocksMoney(){
         clocks.forEach((clock) => {
             clock.time = convertTime(clock.clock.textContent);
         });
@@ -105,11 +108,10 @@ if(valid) {
             clocks[index].moneyElementReference.textContent = `$${currentMoney.toFixed(2)}`;
 
         }
-
-
-    });
+    }
 
     observer.observe(clocks[0].clock, { characterData: true, attributes: false, childList: false, subtree: true });
+    updateClocksMoney() // run once for formatting purposes. Or if clocks are stopped
 
     function convertTime(timeString) {
         const time = timeString.trim();
