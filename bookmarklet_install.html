@@ -4,124 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clockify Time to Money</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h2>Clockify Time to Money</h2>
-    <p>To install, drag the link into your bookmarks bar.</p>
-    
-    <a href="javascript: (()=>{
-        const normalRate = prompt(`What is your hourly rate?`)
-    const overtimeRate = prompt(`What is your overtime rate?`)
-    const normalHoursCap = prompt(`What is your normal hours cap?`, 40)
-    const overtimeHoursCap = prompt(`What is your overtime hours cap?`, 10)
-    
-    // TODO add checks for numbers
-    
-    let clocks = [
-        {
-            // weekly clock
-            parent: document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(1) > approval-header > div.cl-d-flex.cl-align-items-end.cl-mt-2.cl-mt-lg-0.cl-justify-content-lg-end.cl-max-width-85`),
-            clock: document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(1) > approval-header > div.cl-d-flex.cl-align-items-end.cl-mt-2.cl-mt-lg-0.cl-justify-content-lg-end.cl-max-width-85 > div.cl-h2.cl-mb-0.cl-ml-2.cl-lh-1.ng-star-inserted`),
-        },
-    ]
-    
-    document.querySelectorAll(`#layout-main > div > tracker2 > div > div > div > div > entry-group`).forEach((element, index)=>{
-        clocks.push({
-            parent: document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(${index + 1}) > div > entry-group-header > div > div:nth-child(2)`),
-            clock: document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(${index + 1}) > div > entry-group-header > div > div:nth-child(2) > div.cl-h2.cl-mb-0.cl-ml-2.cl-lh-1`),
-        })
-    })
-    
-    
-    clocks.forEach((clock)=>{
-        // create a money counter for each clock
-        const element = document.createElement('h2')
-        element.textContent = convertTime(clock.clock.textContent)
-        element.style = `margin: 0; margin-left: 2em;`
-        clock.parent.appendChild(element)
-        clock.moneyElementReference = element
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h2>Clockify Time to Money</h2>
+        <p>To install, drag the link into your bookmarks bar.</p>
         
-    });
+        <a href="javascript:(function(){const normalRate=prompt(`What is your hourly rate?`),overtimeRate=prompt(`What is your overtime rate?`),normalHoursCap=prompt(`What is your normal hours cap?`,40),overtimeHoursCap=prompt(`What is your overtime hours cap?`,10);let clocks=[{parent:document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(1) > approval-header > div.cl-d-flex.cl-align-items-end.cl-mt-2.cl-mt-lg-0.cl-justify-content-lg-end.cl-max-width-85`),clock:document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(1) > approval-header > div.cl-d-flex.cl-align-items-end.cl-mt-2.cl-mt-lg-0.cl-justify-content-lg-end.cl-max-width-85 > div.cl-h2.cl-mb-0.cl-ml-2.cl-lh-1.ng-star-inserted`)}];document.querySelectorAll(`#layout-main > div > tracker2 > div > div > div > div > entry-group`).forEach(((e,t)=>{clocks.push({parent:document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(${t+1}) > div > entry-group-header > div > div:nth-child(2)`),clock:document.querySelector(`#layout-main > div > tracker2 > div > div > div > div > entry-group:nth-child(${t+1}) > div > entry-group-header > div > div:nth-child(2) > div.cl-h2.cl-mb-0.cl-ml-2.cl-lh-1`)})})),clocks.forEach((e=>{const t=document.createElement(`h2`);t.textContent=convertTime(e.clock.textContent),t.style=`margin: 0; margin-left: 2em;`,e.parent.appendChild(t),e.moneyElementReference=t}));const observer=new MutationObserver((e=>{clocks.forEach((e=>{e.time=convertTime(e.clock.textContent)}));const t=calculateRateWeekly(clocks[0].time);clocks[0].moneyElementReference.textContent=`$${t.toFixed(2)}`;let r=normalHoursCap,o=overtimeHoursCap;for(let e=clocks.length-1;e>0;e--){let t=clocks[e].time,c=0;t>r?(c=r*normalRate,t-=r,r=0,t>o&&(t=o),c+=t*overtimeRate,o-=t):(c=t*normalRate,r-=t),clocks[e].money=c,clocks[e].moneyElementReference.textContent=`$${c.toFixed(2)}`}}));function convertTime(e){const t=e.trim().split(`:`);return parseInt(t[0])+parseInt(t[1])/60+parseInt(t[2])/60/60}function calculateRateWeekly(e){if(e>normalHoursCap){let t=e-normalHoursCap;return t>overtimeHoursCap&&(t=overtimeHoursCap),normalHoursCap*normalRate+t*overtimeRate}return e*normalRate}observer.observe(clocks[0].clock,{characterData:!0,attributes:!1,childList:!1,subtree:!0});}());">
+            Clockify Time to Money
+          </a>
+    </div>
     
-    // create an observer for weekly clock to trigger update of money elements. 
-    const observer = new MutationObserver((mutationRecord)=> {
-    
-        clocks.forEach((clock)=>{
-            clock.time = convertTime( clock.clock.textContent )
-        })
-    
-        // weekly clock calculation is done in one go. 
-        const money = calculateRateWeekly(clocks[0].time)
-        clocks[0].moneyElementReference.textContent = `$${money.toFixed(2)}`
-    
-        let normalHoursAvailable = normalHoursCap
-        let overtimeHoursAvailable = overtimeHoursCap
-    
-        // from down to top update money values in daily clocks
-        for (let index = clocks.length - 1; index > 0; index--) {
-    
-            let currentTime = clocks[index].time
-            let currentMoney = 0
-    
-            if(currentTime > normalHoursAvailable){
-                // the rate is partially normal and partially overtime
-                currentMoney = normalHoursAvailable * normalRate
-                currentTime -= normalHoursAvailable 
-                normalHoursAvailable = 0
-                // if hours left is over ot cap only calculate based on the hours that can be paid.
-                if(currentTime > overtimeHoursAvailable){
-                    // here we reduce the time as to trim the extra hours
-                    currentTime = overtimeHoursAvailable
-                }
-    
-                currentMoney += currentTime * overtimeRate
-                overtimeHoursAvailable -= currentTime
-            }
-            else
-            {
-                currentMoney = currentTime * normalRate
-                normalHoursAvailable -= currentTime
-            }
-    
-            clocks[index].money = currentMoney
-            clocks[index].moneyElementReference.textContent = `$${currentMoney.toFixed(2)}`
-            
-        }
-    
-    
-    })
-    
-    observer.observe(clocks[0].clock, {characterData: true, attributes: false, childList: false, subtree: true })
-    
-    function convertTime(timeString){
-        const time = timeString.trim()
-        const times = time.split(':')
-        const hours = parseInt(times[0])
-        const minutes = parseInt(times[1])
-        const seconds = parseInt(times[2])
-        return hours + (minutes / 60) + (seconds / 60 / 60)
-        //return `$${(normalRate * rate).toFixed(2)}`
-    }
-    
-    function calculateRateWeekly(time){
-        if(time > normalHoursCap){
-            // overtime
-            let ot = time - normalHoursCap
-            if(ot > overtimeHoursCap){
-                // exceeded ot, no more money is awarded past cap
-                ot = overtimeHoursCap
-            }
-            return (normalHoursCap * normalRate) + (ot*overtimeRate)
-        }
-        else{
-            // within normal hours cap
-            return (time * normalRate)
-        }
-    }
-    
-     
-    })();">
-        TESTING
-      </a>
 </body>
 </html>
