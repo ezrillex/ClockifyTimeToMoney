@@ -5,10 +5,10 @@ let valid = true;
 
 if (config != null) {
     config = JSON.parse(config);
-    normalRate = config.normalRate;
-    overtimeRate = config.overtimeRate;
-    normalHoursCap = config.normalHoursCap;
-    overtimeHoursCap = config.overtimeHoursCap;
+    normalRate = parseFloat(config.normalRate);
+    overtimeRate = parseFloat(config.overtimeRate);
+    normalHoursCap = parseFloat(config.normalHoursCap);
+    overtimeHoursCap = parseFloat(config.overtimeHoursCap);
 }
 else {
     normalRate = parseFloat(prompt(`What is your hourly rate?`));
@@ -35,7 +35,7 @@ else {
 
 
 
-if (valid) {
+if(valid) {
     let clocks = [
         {
             // weekly clock
